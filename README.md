@@ -6,7 +6,7 @@
 <p align="center">
 	<a href="./docs/matlab-common-operations.md">Common Matlab operations</a>&nbsp;&nbsp;&nbsp;
 	<a href="./docs/GMM-UBM-speaker-model.md">GMM-UBM speaker model</a>&nbsp;&nbsp;&nbsp;
-	<a href="create-list.md">Creating a list</a>&nbsp;&nbsp;&nbsp;
+	<a href="./docs/HTK-Tutorial.md">HTK Tutorial</a>&nbsp;&nbsp;&nbsp;
 	<a href="https://twitter.com/awesome__re">Twitter</a>&nbsp;&nbsp;&nbsp;
 	<a href="https://www.redbubble.com/people/sindresorhus/works/30364188-awesome-logo">Stickers & t-shirts</a>
 </p>
