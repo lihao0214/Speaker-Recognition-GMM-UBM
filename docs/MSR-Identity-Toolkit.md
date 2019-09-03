@@ -2,15 +2,13 @@
 
 ## Content
 
-[1.下载链接](#1-下载链接)
+- [1.下载链接](#1-下载链接)
 
-[2.目录结构](#2-目录结构)
+- [2.目录结构](#2-目录结构)
 
-[3.需要执行的文件](#3-需要执行的文件)
-
-- [demo_gmm_ubm.m](#demo_gmm_ubm)
-
-- [demo_ivector_plda.m](#demo_ivector_pldam)
+- [3.需要执行的文件](#3-需要执行的文件)
+  - [demo_gmm_ubm.m](#demo-gmm-ubm)
+  - [demo_ivector_plda.m](#demo-ivector-plda)
 
 
 
