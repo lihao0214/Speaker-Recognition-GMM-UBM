@@ -12,6 +12,7 @@ This is about different methods to generate MFCC features and analyze the effect
 - [(1)ASV_enroll.m](#asv-enroll)
 - [(2)ASV_verify.m](#asv-verify-m)
 - [(3)read_feature.m](#read-feature)
+- [(4)cmvn.m](#cmvn)
 
 
 
@@ -149,6 +150,36 @@ function data = read_feature(file)
     data = melcepst(x, fs, '0dD', nCeps, nChan, fSize, fRate, fL, fH);
     data = cmvn(data', true);
 end
+```
+
+### (4)cmvn.m <span id = "cmvn">
+
+```matlab
+function Fea = cmvn(fea, varnorm)
+% performs cepstral mean and variance normalization
+%
+% Inputs:
+%   - fea     : input ndim x nobs feature matrix, where nobs is the 
+%				number of frames and ndim is the feature dimension
+%   - varnorm : binary switch (false|true), if true variance is normalized 
+%               as well
+% Outputs:
+%   - Fea     : output p x n normalized feature matrix.
+%
+% Omid Sadjadi <s.omid.sadjadi@gmail.com>
+% Microsoft Research, Conversational Systems Research Center
+
+if ( nargin == 1 ), varnorm = false; end 
+    
+mu = mean(fea, 2);
+if varnorm,
+    stdev = std(fea, [], 2);
+else
+    stdev = 1;
+end
+
+Fea = bsxfun(@minus, fea, mu);
+Fea = bsxfun(@rdivide, Fea, stdev);
 ```
 
 
