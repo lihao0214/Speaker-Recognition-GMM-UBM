@@ -2,13 +2,13 @@
 
 ## Content
 
-- [1.下载链接](#1-下载链接)
+- [1. 下载链接](#1-下载链接)
 
-- [2.目录结构](#2-目录结构)
+- [2. 目录结构](#2-目录结构)
 
-- [3.需要执行的文件](#3-需要执行的文件)
-  - [demo_gmm_ubm.m](#demo-gmm-ubm)
-  - [demo_ivector_plda.m](#demo-ivector-plda)
+- [3. 需要执行的文件](#3-需要执行的文件)
+  - [3.1 demo_gmm_ubm.m](#demo-gmm-ubm)
+  - [3.2 demo_ivector_plda.m](#demo-ivector-plda)
 
 
 
@@ -117,7 +117,7 @@ labels = C{3};
 eer = compute_eer(scores, labels, true);
 ```
 
-#### demo_ivector_plda.m
+#### demo_ivector_plda.m <span id = "demo-ivector-plda">
 
 ```matlab
 %{ 
