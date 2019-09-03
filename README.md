@@ -14,13 +14,13 @@
 ## Contents
 
 - [Transform WAV To Readable file](#transform-wav-to-readable-file)
-
 - [Extract MFCC Features From Readable File](#extract-mfcc-features-from-readable-file)
+- [Generate 3 Important File](#generate-3-important-file)
 
 
 
 
-### Transform WAV To Readable file
+## Transform WAV To Readable file
 
 - Download TIMIT corpus.
 
@@ -147,7 +147,7 @@
     toc
     ```
 
-### Extract MFCC Features From Readable File
+## Extract MFCC Features From Readable File
 
 - Download HTK ToolKit and set up its environment.
 
@@ -194,6 +194,55 @@
 
   ```bash
   Hcopy -A -D -C  analysis.conf -S targetlist.txt
+  ```
+
+
+## Generate 3 Important File
+
+- <font color=800080 size=3>**ubm.lst**</font>用于训练UBM
+
+  里面包含5300个speech的mfcc的**文件路径**
+
+  ```
+  D:\Project\Speaker-Recognition\timit_mfcc\TEST\DR1\FAKS0\SA1.mfcc    
+  D:\Project\Speaker-Recognition\timit_mfcc\TEST\DR1\FAKS0\SA2.mfcc    
+  D:\Project\Speaker-Recognition\timit_mfcc\TEST\DR1\FAKS0\SI1573.mfcc 
+  D:\Project\Speaker-Recognition\timit_mfcc\TEST\DR1\FAKS0\SI2203.mfcc 
+  D:\Project\Speaker-Recognition\timit_mfcc\TEST\DR1\FAKS0\SI943.mfcc  
+  ...
+  共5300行
+  ```
+
+- <font color=800080 size=3>**speaker_model_maps.lst**</font>用于适应训练人
+
+  一共630人，已经挑走530人作UBM，还有100人，每个人都有10句话。这里就是这个100人的前9句话的mfcc文件的**人名 文件路径**
+
+  ```
+  MTXS0 D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR6\MTXS0\SA1.mfcc   
+  MTXS0 D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR6\MTXS0\SA2.mfcc   
+  MTXS0 D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR6\MTXS0\SI1060.mfcc
+  MTXS0 D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR6\MTXS0\SI1690.mfcc
+  ...
+  共900行
+  ```
+
+- <font color=800080 size=3>**trials.lst**</font>用于测试
+
+  剩余的100人，每个人都跟其他99人形成target和impostor的关系，所以从1人到第100个人做100论。一共10000行，对应所有的测试语句。
+
+  格式为**人名 特征路径名 标签**
+
+  ```
+  MTXS0  D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR6\MTXS0\SX70.mfcc  target
+  MTXS0  D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR7\FBLV0\SX68.mfcc  impostor
+  MTXS0  D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR7\FCJS0\SX77.mfcc  impostor
+  MTXS0  D:\Project\Speaker-Recognition\timit_mfcc\TRAIN\DR7\FCRZ0\SX73.mfcc  impostor
+  ...
+  第100 行 ... impostor
+  第101 行 ... target
+  第201 行 ... target
+  ...
+  第10000行 ... impostor
   ```
 
   
