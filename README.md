@@ -248,5 +248,15 @@
 
 ## Use MSR ToolKit To Analyze MFCC Features
 
-- (Download MSR ToolKit)[https://www.microsoft.com/en-us/download/details.aspx?id=52279]
+- [Download MSR ToolKit](https://www.microsoft.com/en-us/download/details.aspx?id=52279)
 
+- Notice 4 important m file：
+
+  - <font color=800080 size=3>**demo_gmm_ubm.m**</font>
+  - <font color=800080 size=3>**demo_gmm_ubm_artificial.m**</font>
+  - <font color=800080 size=3>**demo_ivector_plda.m**</font>
+  - <font color=800080 size=3>**demo_ivector_plda_artificial.m**</font>
+
+- <a href="./docs/MSR-Identity-Toolkit.md">Refer to MSR ToolKit Tutorial</a>
+
+  
