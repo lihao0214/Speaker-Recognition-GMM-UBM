@@ -10,7 +10,7 @@ This is about different methods to generate MFCC features and analyze the effect
 ## 1.ASV_verify <span id = "asv-verify">
 
 - [(1)ASV_enroll.m](#asv-enroll)
-- [(2)ASV_verify.m](#asv-verify)
+- [(2)ASV_verify.m](#asv-verify-m)
 
 
 
@@ -85,7 +85,7 @@ ubm : 1x1 structure
 V : 600x600 double
 ```
 
-### (2)ASV_verify <span id = "asv-verify">
+### (2)ASV_verify <span id = "asv-verify-m">
 
 ```matlab
 function score = ASV_verify(wavfile, vpfile, mpfile)
