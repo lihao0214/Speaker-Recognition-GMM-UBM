@@ -7,20 +7,38 @@
 
 - [Functions](#functions)
 - [Trickes](#tricks)
-- [Built-in Functions](#built-in-functions)
 
 
 ## Functions
 
+- [nargin](#nargin)
 - 
 
 
+
+## nargin
+
+nargin是用来判断输入变量个数的函数，这样就可以针对不同的情况执行不同的功能。通常可以用他来设定一些默认值，如下面的函数。
+
+```matlab
+function y = nargin_test(a,b)
+    if nargin==0
+        a=1;b=1;
+    elseif nargin==1
+        b=1;
+    end
+    y=a+b;
+end
+```
+
+在调用此函数时，如果写成y=nargin_test()，则输出y=2；如果写成y=nargin_test(3)，则输出y=4；如果写成y=nargin_test(4，5)，则输出y=9。
 
 
 ## Tricks
 
 - [Compare Variation](#compare-variation)
 - [Compare Variables' Details](#compare-variables-details)
+- 
 
 
 ## Compare Variation
@@ -49,18 +67,5 @@ load('02-HKT-ToolKit.mat')
 htk_original = data
 ```
 
-## Built-in Functions
 
-1. 什么是内置函数？
 
-   - 内置函数是一类比较特殊的MATLAB底层函数，它们的特点是：一般不是用MATLAB语言写成的、无法看到其源代码（只能看到注释）、执行效率相对较高。 而一般的MATLAB自带的函数都是可以看到源代码甚至可以编辑源代码的。
-
-2. 内置函数与关键字的区别？
-
-   - 关键字是一类更加特殊的底层函数，包括break case catch classdef continue else elseif end for function global if otherwise parfor persistent return spmd switch try while这20个。
-   - 关键字不能作为变量名，例如，不能新建一个名叫for的变量。内置函数可以被覆盖(override)，用做变量名。例如，你可以新建一个名叫abs的变量，只不过，MATLAB的绝对值函数abs就无法正常调用了。（实在想要调用的话，可以借助builtin函数）
-   - 一般而言，不建议override内置函数。也就是说，变量名尽量避开内置函数名称。
-
-   
-
-   
