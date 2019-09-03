@@ -4,16 +4,16 @@ This is about different methods to generate MFCC features and analyze the effect
 
 ## Content
 
-- [一、ASV_verify](#asv-verify)
-- [二、MSR ToolKit](#msr-toolkit)
+- [1. ASV_verify](#asv-verify)
+- [2. MSR ToolKit](#msr-toolkit)
 
-## 一、ASV_verify <span id = "asv-verify">
+## 1. ASV_verify <span id = "asv-verify">
 
-1. [ASV_enroll.m](#asv-enroll)
+- [ASV_enroll.m](#asv-enroll)
 
 
 
-### 1. ASV_enroll.m <span id = "asv-enroll">
+### (1) ASV_enroll.m <span id = "asv-enroll">
 
 ```matlab
 function err_code = ASV_enroll(wavfile, vpfile, mpfile)
@@ -49,7 +49,7 @@ err_code = ASV_enroll(wavfile, vpfile, mpfile) % err_code = 0
 
 **参数**：
 
-1. [mpfile](#mpfile)
+- [mpfile](#mpfile)
 
 #### mpfile ：mp.mat  <span id = "mpfile">
 
@@ -71,7 +71,7 @@ V : 600x600 double
 ```
 
 
-## 二、MSR ToolKit <span id = "msr-toolkit">
+## 2. MSR ToolKit <span id = "msr-toolkit">
 
 
 
