@@ -15,7 +15,8 @@
 - [nargout](#nargout)
 - [varargin](#varargin)
 - [varargout](#varargout)
-- 
+- [assert](#assert)
+- [num2str](#num2str)
 
 
 
@@ -104,7 +105,76 @@ g = add(1,2) % g = 3
 [g1,g2] = add(1,2,3) % g1 = 3 ; g2 = 0
 ```
 
+## assert
 
+Generate error when condition is violated
+
+**Syntax**：
+
+- assert(expression)
+- assert(expression, 'msgString')
+- assert(expression, 'msgString', value1, value2, ...)
+- assert(expression, 'msgIdent', 'msgString', value1, value2, ...)
+
+**Description**：
+
+- `assert(*expression*)` evaluates *expression* and, if it is `false`, generates an exception.
+
+在matlab中assert函数用来判断一个expression是否成立，如不成立则报错'*msgString*'。
+
+例如：
+
+```matlab
+assert(length(Y) == N, 'error: the number of labels does not match the number of instances!');  % 若Y的长度不为N，则输出后面这句错误提示。
+```
+
+注意'*msgString*'中还可嵌入指定值，如上面第三种方法。
+
+Matlab也有错误报告函数 error 和 warning。由于要求对参数的保护，需要对输入参数或处理过程中的一些状态进行判断，判断程序能否/是否需要继续执行。在matlab中经常使用到这样的代码：
+
+```matlab
+if c<0
+    error(['c = ' num2str(c) '<0, error!']);
+end
+```
+
+虽然无伤大雅，可也不好看，如果借用assert函数，就可以写成：
+
+```matlab
+assert(c>=0, ['c = ' num2str(c) '<0 is impossible!']);
+```
+
+虽然系统要多执行一些（后面的参数必须先解释出来再执行assert函数），但在保证程序可读性和正确性方面功劳是很大的。当然，如果不想损失性能，直接写成：
+
+```matlab
+assert(c>=0);
+```
+
+## num2str
+
+函数功能： 把数值转换成字符串， 转换后可以使用fprintf或disp函数进行输出。在matlab命令窗口中键入doc num2str或help num2str即可获得该函数的帮助信息。
+
+**语法格式**：
+
+- str = num2str(A)：把数组A中的数转换成字符串表示形式。
+- str = num2str(A, precision)：把数组A转换成字符串形式表示，precision表示精度， 比如precision为3表示保留最多3位有效数字， 例如0.5345转换后为0.534,1.2345转换后为1.23。即从左边第一个不为0的数开始保留3个数值。
+- str = num2str(A, format)：按format指定格式进行格式化转换，通常'%11.4g'是默认的。
+
+**相关函数**：
+
+- mat2str, int2str, str2num, sprintf, fprintf
+
+  ```matlab
+   A = [1, 2, 3];
+   B = num2str(A); % B = '1 2 3'
+   fprintf('%s', B)
+   C = [1.564, 0.12345];
+   D = num2str(C, 3) % D = '1.56 0.123'
+   D = int32(1) % D = 1 % 32 位有符号整数数组
+   num2str(D, '%.6f') % num2str = '1.000000'
+  ```
+
+  
 
 ## Tricks
 

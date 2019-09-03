@@ -11,6 +11,7 @@ This is about different methods to generate MFCC features and analyze the effect
 
 - [(1)ASV_enroll.m](#asv-enroll)
 - [(2)ASV_verify.m](#asv-verify-m)
+- [(3)read_feature.m](#read-feature)
 
 
 
@@ -110,7 +111,6 @@ vp = V(:, 1:lda_dim)' * vp;
 vp2 = V(:, 1:lda_dim)' * vp2;
 
 score = score_gplda_trials(plda, vp, vp2);
-
 score = 1/(1+exp(-(score-s_thr)/s_std));
 
 end
@@ -122,6 +122,33 @@ wavfile = 'C:\Users\PC\Desktop\ivector-master\MSRIT\sample.wav';
 vpfile = 'samplewav.mat';
 mpfile = 'mp.mat';
 score = ASV_verify(wavfile, vpfile, mpfile) % score = 0.9786
+```
+
+### (3)read_feature.m <span id = "read-feature">
+
+```matlab
+function data = read_feature(file)
+%     assert(exist(file))
+    [x,fs] = audioread(file); 
+    % x - speech signal
+    % fs - sample rate in Hz
+%     assert(fs == 16000);
+    premcoef = 0.97; % 定义预加重系数
+    rand ("seed", 1);
+%     x = rm_dc_n_dither(x, fs); 
+%     x = filter([1 -premcoef], 1, x);
+    v = vadsohn(x,fs);
+    x = x(v==1);
+    fL = 100.0/fs;   % 低端滤波器
+    fH = 8000.0/fs;  % 高端滤波器
+    fRate = 0.010 * fs; 
+    fSize = 0.025 * fs; 
+    nChan = 27;  % 定义美尔频谱的频道数量
+    nCeps = 12;  % 定义取到的MFCC首系数的个数
+
+    data = melcepst(x, fs, '0dD', nCeps, nChan, fSize, fRate, fL, fH);
+    data = cmvn(data', true);
+end
 ```
 
 
