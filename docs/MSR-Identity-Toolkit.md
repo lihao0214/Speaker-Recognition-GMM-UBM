@@ -8,11 +8,11 @@
 
 - [3.需要执行的文件](#3-需要执行的文件)
 
-  - [demo_gmm_ubm.m](#demo_gmm_ubm.m)
+  [demo_gmm_ubm.m](#demo_gmm_ubm.m)
 
-  - [demo_ivector_plda.m](#demo_ivector_plda.m)
+  [demo_ivector_plda.m](#demo_ivector_plda.m)
 
-    
+  
 
 #### 1. 下载链接
 
