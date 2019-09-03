@@ -20,7 +20,7 @@
 
 
 
-### 1. Transform WAV To Readable file
+### Transform WAV To Readable file
 
 - Download TIMIT corpus.
 
@@ -147,7 +147,7 @@
     toc
     ```
 
-### 2. Extract MFCC Features From Readable File
+### Extract MFCC Features From Readable File
 
 - Download HTK ToolKit and set up its environment.
 
