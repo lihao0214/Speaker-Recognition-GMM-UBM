@@ -108,12 +108,13 @@ g = add(1,2) % g = 3
 
 ## Tricks
 
-- [Compare Variation](#compare-variation)
+- [Compare Variation In Figure](#compare-variation-in-figure)
+- [Compare Variation In Number](#compare-variation-in-number)
 - [Compare Variables' Details](#compare-variables-details)
-- 
+- [Funtion Comments](#function-comments)
 
 
-## Compare Variation
+## Compare Variation In Figure
 
 ```matlab
 figure
@@ -126,6 +127,12 @@ for i = 1:39
 	clf('reset')
 end
 ```
+## Compare Variation In Number
+
+```matlab
+sum(sum(abs(tmpdata - tmpdata2(:,1:378))))/(39*378)
+```
+
 ## Compare Variables' Details
 
 ```matlab
@@ -139,5 +146,21 @@ load('02-HKT-ToolKit.mat')
 htk_original = data
 ```
 
+## Function Comments
 
+```matlab
+function err_code = ASV_enroll(wavfile, vpfile, mpfile)
+% Author : 
+% Date : 28 Nov, 2017
+%
+% Usage :
+% err_code = ASV_enroll(wavfile, vpfile, modelfile)
+%   wavfile - wav file for enrolment (.wav), sampling frequency = 16Hz
+%   vpfile - generated voiceprint file (.mat) 
+%   mpfile - model parameters file (.mat)
+%   err_code - error code
+%
+% Example:
+%   octave --eval 'ASV_enroll("./test/thomas1.wav","./test/thomas_vp.mat","./mp.mat")'
+```
 
