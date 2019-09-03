@@ -4,16 +4,16 @@ This is about different methods to generate MFCC features and analyze the effect
 
 ## Content
 
-- [1. ASV_verify](#asv-verify)
-- [2. MSR ToolKit](#msr-toolkit)
+- [1.ASV_verify](#asv-verify)
+- [2.MSR ToolKit](#msr-toolkit)
 
-## 1. ASV_verify <span id = "asv-verify">
+## 1.ASV_verify <span id = "asv-verify">
 
-- [ASV_enroll.m](#asv-enroll)
+- [(1)ASV_enroll.m](#asv-enroll)
 
 
 
-### (1) ASV_enroll.m <span id = "asv-enroll">
+### (1)ASV_enroll.m <span id = "asv-enroll">
 
 ```matlab
 function err_code = ASV_enroll(wavfile, vpfile, mpfile)
@@ -71,7 +71,7 @@ V : 600x600 double
 ```
 
 
-## 2. MSR ToolKit <span id = "msr-toolkit">
+## 2.MSR ToolKit <span id = "msr-toolkit">
 
 
 
