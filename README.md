@@ -23,7 +23,7 @@
 1. Download TIMIT corpus.
 
 2. Create a file (copy TIMIT's two files in it：(1)TEST (2)TRAIN)which has the same directory form as TIMIT corpus：
-![](https://img.shields.io/badge/language-python-brightgreen)
+<font color=800080 size=3>**main.py**</font>
    
    ```python
    import os, sys
