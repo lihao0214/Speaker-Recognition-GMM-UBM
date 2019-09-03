@@ -14,6 +14,7 @@
 ## Contents
 
 1. [Transform WAV To Readable file](#transform-wav-to-readable-file)
+2. [Extract MFCC Features From Readable File](#extract-mfcc-features-from-wav)
 
 
 
@@ -145,5 +146,53 @@
     toc
     ```
 
+### 2. Extract MFCC Features From Readable File
 
+- Download HTK ToolKit and set up its environment.
 
+- <font color=800080 size=3>**find_wav.m**</font>
+
+- <font color=800080 size=3>**wav_mfcc_path.m(入口函数)**</font>生成targetlist.txt文件
+
+  ```matlab
+  path1 = 'D:\Project\Speaker-Recognition\timit_wav8000';
+  path2 = 'D:\Project\Speaker-Recognition\timit_mfcc';
+  filename = 'D:\Project\Speaker-Recognition\Program-Code\03-extract-mfcc-from-wav\targetlist.txt';
+  wav_filesName = find_wav(path1);
+  [m,n] = size(wav_filesName);
+  len1 = length(path1);
+  fid = fopen(filename, 'w+t');
+  
+  if fid < 0
+      fprintf('error opening file\n');
+      return;
+  end
+  
+  tic
+  hwt = waitbar(0,'please wait....');
+  count = 0;
+  for i = 1:m
+      p = strfind(wav_filesName(i,:),'.W'); 
+      wav_filename = wav_filesName(i,:);
+      mfcc_filename = [path2, wav_filesName(i,len1+1:p), 'mfcc'];
+      one_line_txt = [wav_filename,' ',mfcc_filename];
+      fprintf(fid,'%s\n',one_line_txt);
+      count = count + 1;
+      waitbar(i/m);
+  end
+  fprintf('count is %g\n', count);
+  close(hwt);
+  toc
+  ```
+
+- <a href="./docs/HTK-Tutorial.md">制作analysis.conf文件</a>
+
+- 将targetlist.txt和analysis.conf这两个文件都放在XXX\htk\bin.win32目录下
+
+- 执行如下cmd命令，会在指定目录生成mfcc文件：
+
+  ```bash
+  Hcopy -A -D -C  analysis.conf -S targetlist.txt
+  ```
+
+  
