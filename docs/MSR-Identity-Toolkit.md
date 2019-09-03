@@ -28,7 +28,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=52279
 
 其中**demo_gmm_ubm.m**和**demo_ivector_plda.m**需要修改一下脚本才可以运行，**demo_gmm_ubm_artificial.m**和**demo_ivector_plda_artificial.m**中的语音数据是ML生成的，所以可以直接运行。
 
-1. ##### **demo_gmm_ubm.m**：
+1. ### demo_gmm_ubm.m：
 
    ```matlab
    %{ 
@@ -119,7 +119,7 @@ https://www.microsoft.com/en-us/download/details.aspx?id=52279
    eer = compute_eer(scores, labels, true);
    ```
 
-2. ##### demo_ivector_plda.m：
+2. ### demo_ivector_plda.m：
 
    ```matlab
    %{ 
