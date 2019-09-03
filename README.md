@@ -20,8 +20,6 @@
 - [Use MSR ToolKit To Analyze MFCC Features](#use-msr-toolkit-to-analyze-mfcc-features)
 
 
-
-
 ## Transform WAV To Readable file
 
 - Download TIMIT corpus.
@@ -260,4 +258,5 @@
 
 - <a href="./docs/MSR-Identity-Toolkit.md">Refer to MSR ToolKit Tutorial</a>
 
-  
+
+![](./pictures/01-gmm-ubm.svg)
