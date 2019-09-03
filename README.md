@@ -14,7 +14,7 @@
 ## Contents
 
 1. [Transform WAV To Readable file](#transform-wav-to-readable-file)
-2. [Extract MFCC Features From Readable File](#extract-mfcc-features-from-wav)
+2. [Extract MFCC Features From Readable File](#extract-mfcc-features-from-readable-file)
 
 
 
