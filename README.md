@@ -20,11 +20,11 @@
 
 ### 1. Transform WAV To Readable file
 
-![](https://img.shields.io/badge/language-python-brightgreen)
 1. Download TIMIT corpus.
 
 2. Create a file (copy TIMIT's two files in it：(1)TEST (2)TRAIN)which has the same directory form as TIMIT corpus：
-
+![](https://img.shields.io/badge/language-python-brightgreen)
+   
    ```python
    import os, sys
    
@@ -51,7 +51,6 @@
                    os.unlink(path5)
    print(count)
    print('complete delete')
-   ```
-
+```
    
-
+   
