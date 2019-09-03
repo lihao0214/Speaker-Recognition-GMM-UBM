@@ -56,6 +56,38 @@
 
 #### 7.1 方差 <span id = "方差">
 
+中文名：方差，外文名：variance/deviation Var，类型：统计学，种类：离散型方差、连续型方差。
+
+方差是在概率论和统计方差**衡量**随机变量或一组数据的**离散程度的度量**。概率论中方差用来度量随机变量和其数学期望（即均值）之间的**偏离程度**。统计中的方差（样本方差）是每个样本值与全体样本值的平均数之差的平方值的平均数。
+
+![img](https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D113/sign=c388d5738013632711edc632a28ea056/023b5bb5c9ea15cee484a9a6bc003af33a87b233.jpg)
+
+![img](https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D18/sign=cbff73bb48a7d933bba8e07bac4b41a2/f7246b600c3387442fb466d35b0fd9f9d72aa028.jpg)为总体方差，![img](https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D12/sign=19a04804093b5bb5bad724fc37d3f460/4034970a304e251fa45ead57ad86c9177e3e53f7.jpg)为变量，![img](https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D13/sign=18b6d1d4db1373f0f13f6b9ca60f5cc6/1b4c510fd9f9d72aa9ac59b2de2a2834359bbb51.jpg)为总体均值，![img](https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/s%3D14/sign=198a4804093b5bb5bad724fa37d3f40c/4034970a304e251fa474ad57ad86c9177e3e5399.jpg)为总体例数。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
