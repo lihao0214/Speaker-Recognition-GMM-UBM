@@ -9,7 +9,7 @@
 	<a href="./docs/MSR-Identity-Toolkit.md">MSR-Identity-Toolkit</a>&nbsp;&nbsp;&nbsp;
 	<a href="./docs/matlab-common-operations.md">Matlab operations</a>&nbsp;&nbsp;&nbsp;
 	<a href="./docs/matlab-functions-you-will-encounter.md">Matlab Functions Used</a>&nbsp;&nbsp;&nbsp;
-	<a href="./docs/Programs.md.md">Programs.md</a>
+	<a href="./docs/Programs.md">Programs.md</a>
 </p>
 
 ## Contents
