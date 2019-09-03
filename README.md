@@ -53,4 +53,96 @@
    print('complete delete')
 ```
    
+3. Transform WAV to readable files and save in the above file：
+
+   <font color=800080 size=3>**conver_wav.m(入口函数)**</font>
+
+   ```matlab
+   path1 = 'D:\Project\Speaker-Recognition\TIMIT';
+   path2 = 'D:\Project\Speaker-Recognition\timit_wav16000';
+   len1 = length(path1); % 36
+   wav_filesName = find_wav(path1);
+   % wav_filesName(1,:) is 'D:\Project\Speaker-Recognition\TIMIT\TEST\DR1\FAKS0\SA1.WAV'
+   % p1 = strfind(wav_filesName(1,:),'.W') % 56
+   % wav_filesName(1,37:56+3) % is '\TEST\DR1\FAKS0\SA1.WAV'
+   [m,n] = size(wav_filesName);
    
+   % 保存wav文件名，添加人名前缀
+   tic
+   hwt = waitbar(0,'please wait....');
+   for i = 1:m
+       [x,fs] = audioread(wav_filesName(i,:));
+       p = strfind(wav_filesName(i,:),'.W'); 
+       writefileName = [path2,wav_filesName(i,len1+1:p+3)];
+   	audiowrite(writefileName,x,fs);
+       % y = resample(x,1,2);
+       % p = strfind(wav_filesName(i,:),'.W'); 
+       % writefileName = [path2,wav_filesName(i,len1+1:p+3)];
+       % audiowrite(writefileName,y,8000);
+       waitbar(i/m);
+   end
+   close(hwt);
+   toc
+   ```
+
+   <font color=800080 size=3>**find_wav.m**</font>
+
+   ```matlab
+   function [ wav_files ] = find_wav( path )
+     %FIND_WAV, find all wav file recursively
+     wav_files = [];
+     if(isdir(path) == 0) % is path is not a folder, is a file, then return 
+         return;
+     end
+     path_files = dir(path); % path is the folder content of path
+     fileNum = length(path_files);
+     for k= 3:fileNum
+         file = [path,'\', path_files(k).name];
+   %       disp(sprintf('file is %s',file));
+       if (path_files(k).isdir == 1)
+           ret = find_wav(file); % if path_files is a folder, do the find_wav function to the input(file)
+   %         disp(sprintf('ret is %s',ret));
+           if(isempty(ret) ~= 1)
+   %             disp(sprintf('ret is %s',ret));
+               if(isempty(wav_files))
+   %                 disp(sprintf('ret is %s',ret));
+                   wav_files = char(ret);
+   %                 disp(sprintf('wav_files is %s',wav_files));
+               else
+                   wav_files = char(wav_files, ret);
+               end
+           end
+       elseif strfind(path_files(k).name, '.WAV')
+           if(isempty(wav_files))
+               wav_files = char(file);
+           else
+               wav_files = char(wav_files, file);
+           end
+       end
+     end
+   end
+   ```
+
+   <font color=800080 size=3>**check_wav.m**</font>
+
+   ```matlab
+   %clear all;
+   %files = find_wav('D:\D\Speaker-Recognition\timit_wav8000');
+   path2 = 'D:\Project\Speaker-Recognition\timit_wav8000';
+   files = find_wav(path2);
+   tic
+   hwt = waitbar(0,'please wait....');
+   for fileIdx = 1:length(files)
+       file = files(fileIdx,:);
+       [y, fs] = audioread(file);
+       if(fs~=8000)
+           fprintf('%s: fs~=8000\n', file);
+       end
+       waitbar(fileIdx/length(files));
+   end
+   close(hwt);
+   toc
+   ```
+
+   
+
