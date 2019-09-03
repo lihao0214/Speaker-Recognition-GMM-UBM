@@ -17,6 +17,7 @@
 - [varargout](#varargout)
 - [assert](#assert)
 - [num2str](#num2str)
+- [rand](#rand)
 
 
 
@@ -174,7 +175,48 @@ assert(c>=0);
    num2str(D, '%.6f') % num2str = '1.000000'
   ```
 
-  
+## rand
+
+rand('seed',key) : 对于固定的key，不是说从此以后产生的随机数都是相同的，而是在相同的key下，第一次调用rand产生的结果是相同的。
+
+每次你要产生随机数的时候，比如你产生rand(10,1),先调用rand('seed',key)，这里key是某个确定的整数，那么你得到的结果是相同的，再体会一下：
+
+```matlab
+rand('seed',1)
+rand(3,1) % rand(m,n)  m行n列随机数，数值在0到1之间
+ans =
+    0.5129
+    0.4605
+    0.3504
+rand('seed',1)
+rand(3,1)
+ans =
+    0.5129
+    0.4605
+    0.3504
+% 如果你不调用rand('seed',1)，直接调用rand(3,1),那么和第一次的结果是不一样的
+rand('seed',2)
+rand(3,1)
+ans =
+    0.0258
+    0.9210
+    0.7008
+rand(3,1)
+ans =
+    0.5129
+    0.4605
+    0.3504
+rand('seed',2)
+rand(3,1)
+ans =
+    0.0258
+    0.9210
+    0.7008
+```
+
+也就是说，在指定某个seed后，你第一次调用rand(3,1)得到的结果是“确定的”，相当于给rand设定了一个startpoint，相同的seed，对应的startpoint是相同的。
+
+
 
 ## Tricks
 
