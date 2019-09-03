@@ -16,6 +16,7 @@
 - [Transform WAV To Readable file](#transform-wav-to-readable-file)
 - [Extract MFCC Features From Readable File](#extract-mfcc-features-from-readable-file)
 - [Generate 3 Important File](#generate-3-important-file)
+- [Use MSR ToolKit To Analyze MFCC Features](#use-msr-toolkit-to-analyze-mfcc-features)
 
 
 
@@ -245,4 +246,7 @@
   第10000行 ... impostor
   ```
 
-  
+## Use MSR ToolKit To Analyze MFCC Features
+
+- (Download MSR ToolKit)[https://www.microsoft.com/en-us/download/details.aspx?id=52279]
+
