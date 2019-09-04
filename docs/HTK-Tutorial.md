@@ -117,20 +117,36 @@ HTK全名HMM Toolkit，是一款基于hmm模型的语音处理工具。
         CEPLIFTER = 22                #定义倒谱所用到的滤波器组内滤波器个数
         ```
 
-      - 然后制作targetlist.txt文件：
+        上面是针对HTK的，我们制作了专门针对WAV的：
 
+        ```matlab
+        SOURCEFORMAT = WAV        #指定输入语音文件的搁置
+        TARGETKIND = MFCC_0_D_A   #定义提取的特征参数是什么，这里定义的是12个MFCC系数，1个nullMFCC系数c0,13个一阶MFCC系数，13个二阶MFCC系数。一共39个。MFCC的有关材料 百度既可。
+        TARGETRATE = 100000.0     #定义取帧时的滑动长度 #10000 = 10000*100ns = 1ms
+        WINDOWSIZE = 250000.0     #定义帧长
+     
+        NUMCEPS = 12              #定义取到的MFCC首系数的个数。上边的12就来源于此。
+     PREEMCOEF = 0.97          #定义预加重系数，
+        NUMCHANS = 27             #定义美尔频谱的频道数量
+        CEPLIFTER = 22            #定义倒谱所用到的滤波器组内滤波器个数。
+        ```
+
+        
+   
+      - 然后制作targetlist.txt文件：
+   
         ```
         D:\timit_wav8000\TEST\DR1\FAKS0\SA1.WAV D:\timit_mfcc\TEST\DR1\FAKS0\SA1.mfcc
         D:\timit_wav8000\TEST\DR1\FAKS0\SA2.WAV D:timit_mfcc\TEST\DR1\FAKS0\SA2.mfcc
         # ... 共6300行 表示6300条specch
         ```
-
+   
    2. 完成上面两个文件后，运行如下命令：
-
+   
       ```bash
       Hcopy -A -D -C  analysis.conf -S targetlist.txt
       ```
-
+   
    3. 回车，如果没有错误的话，在指定文件夹下，应该有*.mfcc文件出现。此步骤不容易出错，一般都会成功。
 
 
