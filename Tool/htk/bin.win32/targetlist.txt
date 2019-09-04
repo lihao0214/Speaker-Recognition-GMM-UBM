@@ -1,0 +1,4 @@
+D:\Project\Speaker-Recognition\compare_speech\SA1.WAV    D:\Project\Speaker-Recognition\compare_speech\HTK\SA1.mfcc
+D:\Project\Speaker-Recognition\compare_speech\SA2.WAV    D:\Project\Speaker-Recognition\compare_speech\HTK\SA2.mfcc
+D:\Project\Speaker-Recognition\compare_speech\SI1027.WAV D:\Project\Speaker-Recognition\compare_speech\HTK\SI1027.mfcc
+D:\Project\Speaker-Recognition\compare_speech\SI648.WAV  D:\Project\Speaker-Recognition\compare_speech\HTK\SI648.mfcc
