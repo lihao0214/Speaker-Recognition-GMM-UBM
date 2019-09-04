@@ -13,6 +13,7 @@ This is about different methods to generate MFCC features and analyze the effect
 - [(2)ASV_verify.m](#asv-verify-m)
 - [(3)read_feature.m](#read-feature)
 - [(4)cmvn.m](#cmvn)
+- [(5)compute_bw_stats](#compute-bw-stats)
 
 
 
@@ -156,30 +157,120 @@ end
 
 ```matlab
 function Fea = cmvn(fea, varnorm)
+% 倒谱均值和方差归一化（ CMVN）是用于鲁棒语音识别的计算上有效的归一化技术。CMVN 通过线性变换倒谱系数以具有相同的分段统计来最小化噪声污染引起的失真，从而实现稳健的特征提取。可在各种声学环境中保持高水平的识别精度。
 % performs cepstral mean and variance normalization
 %
 % Inputs:
-%   - fea     : input ndim x nobs feature matrix, where nobs is the 
-%				number of frames and ndim is the feature dimension
-%   - varnorm : binary switch (false|true), if true variance is normalized 
-%               as well
+%   - fea     : 特征维度x帧数
+%               input ndim x nobs feature matrix, where nobs is the number of frames and ndim is the feature dimension
+%   - varnorm : true or false
+%               binary switch (false|true), if true variance is normalized as well
 % Outputs:
 %   - Fea     : output p x n normalized feature matrix.
 %
 % Omid Sadjadi <s.omid.sadjadi@gmail.com>
 % Microsoft Research, Conversational Systems Research Center
 
-if ( nargin == 1 ), varnorm = false; end 
+if ( nargin == 1 ), varnorm = false; end % 意思是varnorm默认为false
     
-mu = mean(fea, 2);
-if varnorm,
-    stdev = std(fea, [], 2);
-else
+mu = mean(fea, 2); % 按照矩阵fea的每一行求平均值（每一个特征维度）
+if varnorm, % 当varnorm为真时执行
+    stdev = std(fea, [], 2); % 求fea的标准差 除以n－1,按照行分
+else % 当varnorm不为真时执行
     stdev = 1;
 end
 
-Fea = bsxfun(@minus, fea, mu);
-Fea = bsxfun(@rdivide, Fea, stdev);
+Fea = bsxfun(@minus, fea, mu); % fea的每个元素减去mu的每个元素
+Fea = bsxfun(@rdivide, Fea, stdev); % ..除以..
+```
+
+### (5)compute_bw_stats.m <span id = "compute-bw-stats">
+
+```matlab
+function [N, F] = compute_bw_stats(feaFilename, ubmFilename, statFilename)
+% extracts sufficient statistics for features in feaFilename and GMM 
+% ubmFilename, and optionally save the stats in statsFilename. The first order statistics are centered.
+%
+% Inputs:
+%   - feaFilename  : input feature file name (string) or a feature matrix (one observation per column)
+%   - ubmFilename  : file name of the UBM or a structure with UBM hyperparameters.
+%   - statFilename : output file name (optional)   
+%
+% Outputs:
+%   - N			   : mixture occupation counts (responsibilities) 
+%   - F            : centered first order stats
+%
+% References:
+%   [1] N. Dehak, P. Kenny, R. Dehak, P. Dumouchel, and P. Ouellet, "Front-end 
+%       factor analysis for speaker verification," IEEE TASLP, vol. 19, pp. 788-798,
+%       May 2011. 
+%   [2] P. Kenny, "A small footprint i-vector extractor," in Proc. Odyssey, 
+%       The Speaker and Language Recognition Workshop, Jun. 2012.
+%
+%
+% Omid Sadjadi <s.omid.sadjadi@gmail.com>
+% Microsoft Research, Conversational Systems Research Center
+
+if ischar(ubmFilename),
+	tmp  = load(ubmFilename);
+	ubm  = tmp.gmm;
+elseif isstruct(ubmFilename),
+	ubm = ubmFilename;
+else
+    error('Oops! ubmFilename should be either a string or a structure!');
+end
+[ndim, nmix] = size(ubm.mu);
+m = reshape(ubm.mu, ndim * nmix, 1);
+idx_sv = reshape(repmat(1 : nmix, ndim, 1), ndim * nmix, 1);
+
+if ischar(feaFilename),
+    data = htkread(feaFilename);
+else
+    data = feaFilename;
+end
+
+[N, F] = expectation(data, ubm);
+F = reshape(F, ndim * nmix, 1);
+F = F - N(idx_sv) .* m; % centered first order stats
+
+if ( nargin == 3)
+	% create the path if it does not exist and save the file
+	path = fileparts(statFilename);
+	if ( exist(path, 'dir')~=7 && ~isempty(path) ), mkdir(path); end
+	parsave(statFilename, N, F);
+end
+
+function parsave(fname, N, F) %#ok
+save(fname, 'N', 'F')
+
+function [N, F] = expectation(data, gmm)
+% compute the sufficient statistics
+post = postprob(data, gmm.mu, gmm.sigma, gmm.w(:));
+N = sum(post, 2);
+F = data * post';
+
+function [post, llk] = postprob(data, mu, sigma, w)
+% compute the posterior probability of mixtures for each frame
+post = lgmmprob(data, mu, sigma, w);
+llk  = logsumexp(post, 1);
+post = exp(bsxfun(@minus, post, llk));
+
+function logprob = lgmmprob(data, mu, sigma, w)
+% compute the log probability of observations given the GMM
+ndim = size(data, 1);
+C = sum(mu.*mu./sigma) + sum(log(sigma));
+D = (1./sigma)' * (data .* data) - 2 * (mu./sigma)' * data  + ndim * log(2 * pi);
+logprob = -0.5 * (bsxfun(@plus, C',  D));
+logprob = bsxfun(@plus, logprob, log(w));
+
+function y = logsumexp(x, dim)
+% compute log(sum(exp(x),dim)) while avoiding numerical underflow
+xmax = max(x, [], dim);
+y    = xmax + log(sum(exp(bsxfun(@minus, x, xmax)), dim));
+ind  = find(~isfinite(xmax));
+if ~isempty(ind)
+    y(ind) = xmax(ind);
+end
 ```
 
 

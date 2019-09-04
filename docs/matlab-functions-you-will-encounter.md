@@ -18,6 +18,9 @@
 - [assert](#assert)
 - [num2str](#num2str)
 - [rand](#rand)
+- [mean](#mean)
+- [std](#std)
+- [bsxfun](#bsxfun)
 
 
 
@@ -216,6 +219,62 @@ ans =
 
 也就是说，在指定某个seed后，你第一次调用rand(3,1)得到的结果是“确定的”，相当于给rand设定了一个startpoint，相同的seed，对应的startpoint是相同的。
 
+## mean 
+
+```matlab
+A = [1 2 3; 3 3 6; 4 6 8; 4 7 7];
+mean(A,1) % 按照矩阵A的每一列求平均值
+mean(A,2) % 按照矩阵A的每一行求平均值
+```
+
+## std
+
+std函数是用来计算标准偏差的一个函数，由于其有不同的参数，我们就用下面的例子进行介绍：
+
+标准差（Standard Deviation） ，中文环境中又常称均方差，是离均差平方的算术平均数的平方根，用σ表示。标准差是方差的算术平方根。标准差能反映一个数据集的离散程度。
+
+```matlab
+% y=std(x) 算出x的标准偏差。 x可以是vector或者一个matrix矩阵。
+% 若x是vector，则y是算x的标准偏差。
+% 若x是matrix，则y是个vector，存放的是算每一列/行的标准偏差。  
+% std (x, flag,dim) flag表示标注公差时是要除以n还是n－1
+%                   flag==0.........是除以n－1   
+%                   flag==1.........是除以n
+% dim表示维数
+% dim==1..........是按照列分
+% dim==2..........是按照行分 若是三维的矩阵，dim=＝3就按照第三维来分数据
+% 默认std格式是std(x,0,1);
+
+x=[ 1 2 3 4; 4 5 6 1 ]
+std(x)     % std(x,0,1) 除以n－1,按照列分
+% ans =
+%    2.1213    2.1213    2.1213    2.1213
+std(x,1)   % std(x,1,1) 除以n,按照列分
+% ans =
+%    1.5000    1.5000    1.5000    1.5000
+std(x,0,2) % 又可以写成std(x,[],2) 除以n－1,按照行分
+%ans =
+%    1.2910
+%    2.1602
+std(x,1,2) % 除以n,按照行分
+%ans =
+%    1.1180
+%    1.8708
+```
+
+## bsxfun
+
+【函数描述】C=bsxfun(fun,A,B)：两个数组间元素逐个计算，fun是函数句柄或者m文件。
+
+```matlab
+a = [1,2,3;4,5,6;7,8,9]
+acol = bsxfun(@times,a,[1 2 4]) % a和[1 2 4]点乘
+% acol =
+%     1     4    12
+%     4    10    24
+%     7    16    36
+```
+
 
 
 ## Tricks
@@ -230,13 +289,19 @@ ans =
 
 ```matlab
 figure
+count = 0;
 for i = 1:39
-	plot(tmpdata(i,:), 'b.');
+	count = count + 1;
+	plot(ziyu_original(i,:), 'b.');
 	hold on;
-	plot(tmpdata2(i, :), 'r.');
-	plot(tmphtk(i,:), 'g+');
-	pause(2)
+	plot(ziyu_remove(i, :), 'r.');
+	plot(htk_original(i,:), 'g+');
+	pause(1)
 	clf('reset')
+	a = length(ziyu_original(i,:));
+	b = length(ziyu_remove(i,:));
+	c = length(htk_original(i,:));
+	fprintf('count ziyu_original  ziyu_remove htk_original: %d %d %d %d\n',count,a,b,c)
 end
 ```
 ## Compare Variation In Number
