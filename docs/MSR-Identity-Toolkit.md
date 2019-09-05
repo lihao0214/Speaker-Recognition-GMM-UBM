@@ -62,17 +62,20 @@ Microsoft Research, Conversational Systems Research Center
 
 %}
 
-clc
-clear
+clc %清空工作区内的内容
+clear %清空内存变量
 
 %% Step0: Opening MATLAB pool
 nworkers = 12;
 nworkers = min(nworkers, feature('NumCores'));
+% min():数组的最小元素
+% feature(‘NumCores’) – returns the number of CPU cores seen by Matlab.
 isopen = matlabpool('size')>0;
 if ~isopen, matlabpool(nworkers); end
 
 %% Step1: Training the UBM
 dataList = 'lists/ubm.lst';
+% ubm.lst是6300mfcc中的前5300个mfcc文件的-文件路径
 nmix = 256;
 final_niter = 10;
 ds_factor = 1;
